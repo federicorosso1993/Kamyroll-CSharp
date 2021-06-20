@@ -361,6 +361,13 @@ namespace Kamyroll_CSharp {
                 LoginAsync(arguments[indexLogin], arguments.Contains("--us_unblocker")).Wait();
 
                 //Download(linkdownload);
+                //from link extract episode code example: https://beta.crunchyroll.com/it/watch/GN7UDWD1J/Ambizioni-e-scelte
+                // GN7UDWD1J
+                //api call to base url:
+                //https://beta-api.crunchyroll.com/cms/v2/country_code/maturity_rating/channel/objects/episodecode?locale=getlocale&Signature=signature&Policy=policy&Key-Pair-Id=key_pair_id
+                //getlocale (from country code) locale = "en-US" countries = ["", "JP", "US", "LA", "ES", "FR", "BR", "IT", "DE", "RU", "ME"] locales = ["", "ja-JP", "en-US", "es-LA", "es-ES", "fr-FR", "pt-BR", "it-IT", "de-DE", "ru-RU", "ar-ME"]
+                //response.items[0].__links__.streams.href
+                //from here we can continue with the original code
             } else {
                 System.Diagnostics.Debug.WriteLine("Login or session required");
             }
