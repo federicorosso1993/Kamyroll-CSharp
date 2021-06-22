@@ -6,6 +6,8 @@ I made this to study the way Crunchyroll Beta API works and to create a better w
 
 
 How to use it?
+
+
  .\Kamyroll-CSharp.exe --login username:password --download https://beta.crunchyroll.com/it/watch/episodecode/Title
 
  you will get:
