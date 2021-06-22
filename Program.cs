@@ -6,8 +6,829 @@ using System.Threading.Tasks;
 using System.Text.Json;
 using System.Net;
 using System.Net.Http.Headers;
+using System.Text.Json.Serialization;
 
 namespace Kamyroll_CSharp_Obj {
+    public class Resource {
+        public string href {
+            get; set;
+        }
+    }
+
+    public class Links {
+        public Resource resource {
+            get; set;
+        }
+    }
+
+    public class Actions {
+    }
+
+    public class ArME {
+        public string locale {
+            get; set;
+        }
+        public string url {
+            get; set;
+        }
+        public string format {
+            get; set;
+        }
+        public string hardsub_locale {
+            get; set;
+        }
+    }
+
+    public class DeDE {
+        public string locale {
+            get; set;
+        }
+        public string url {
+            get; set;
+        }
+        public string format {
+            get; set;
+        }
+        public string hardsub_locale {
+            get; set;
+        }
+    }
+
+    public class EnUS {
+        public string locale {
+            get; set;
+        }
+        public string url {
+            get; set;
+        }
+        public string format {
+            get; set;
+        }
+        public string hardsub_locale {
+            get; set;
+        }
+    }
+
+    public class EsES {
+        public string locale {
+            get; set;
+        }
+        public string url {
+            get; set;
+        }
+        public string format {
+            get; set;
+        }
+        public string hardsub_locale {
+            get; set;
+        }
+    }
+
+    public class EsLA {
+        public string locale {
+            get; set;
+        }
+        public string url {
+            get; set;
+        }
+        public string format {
+            get; set;
+        }
+        public string hardsub_locale {
+            get; set;
+        }
+    }
+
+    public class FrFR {
+        public string locale {
+            get; set;
+        }
+        public string url {
+            get; set;
+        }
+        public string format {
+            get; set;
+        }
+        public string hardsub_locale {
+            get; set;
+        }
+    }
+
+    public class ItIT {
+        public string locale {
+            get; set;
+        }
+        public string url {
+            get; set;
+        }
+        public string format {
+            get; set;
+        }
+        public string hardsub_locale {
+            get; set;
+        }
+    }
+
+    public class PtBR {
+        public string locale {
+            get; set;
+        }
+        public string url {
+            get; set;
+        }
+        public string format {
+            get; set;
+        }
+        public string hardsub_locale {
+            get; set;
+        }
+    }
+
+    public class RuRU {
+        public string locale {
+            get; set;
+        }
+        public string url {
+            get; set;
+        }
+        public string format {
+            get; set;
+        }
+        public string hardsub_locale {
+            get; set;
+        }
+    }
+
+    public class Subtitles {
+        [JsonPropertyName("ar-ME")]
+        public ArME ArME {
+            get; set;
+        }
+
+        [JsonPropertyName("de-DE")]
+        public DeDE DeDE {
+            get; set;
+        }
+
+        [JsonPropertyName("en-US")]
+        public EnUS EnUS {
+            get; set;
+        }
+
+        [JsonPropertyName("es-ES")]
+        public EsES EsES {
+            get; set;
+        }
+
+        [JsonPropertyName("es-LA")]
+        public EsLA EsLA {
+            get; set;
+        }
+
+        [JsonPropertyName("fr-FR")]
+        public FrFR FrFR {
+            get; set;
+        }
+
+        [JsonPropertyName("it-IT")]
+        public ItIT ItIT {
+            get; set;
+        }
+
+        [JsonPropertyName("pt-BR")]
+        public PtBR PtBR {
+            get; set;
+        }
+
+        [JsonPropertyName("ru-RU")]
+        public RuRU RuRU {
+            get; set;
+        }
+    }
+
+    public class Captions {
+    }
+
+    public class Softsub {
+        public string locale {
+            get; set;
+        }
+        public string url {
+            get; set;
+        }
+        public string format {
+            get; set;
+        }
+        public string hardsub_locale {
+            get; set;
+        }
+    }
+
+    public class AdaptiveDash {
+        public Softsub softsub {
+            get; set;
+        }
+
+        [JsonPropertyName("ar-ME")]
+        public ArME ArME {
+            get; set;
+        }
+
+        [JsonPropertyName("de-DE")]
+        public DeDE DeDE {
+            get; set;
+        }
+
+        [JsonPropertyName("en-US")]
+        public EnUS EnUS {
+            get; set;
+        }
+
+        [JsonPropertyName("es-ES")]
+        public EsES EsES {
+            get; set;
+        }
+
+        [JsonPropertyName("es-LA")]
+        public EsLA EsLA {
+            get; set;
+        }
+
+        [JsonPropertyName("fr-FR")]
+        public FrFR FrFR {
+            get; set;
+        }
+
+        [JsonPropertyName("it-IT")]
+        public ItIT ItIT {
+            get; set;
+        }
+
+        [JsonPropertyName("pt-BR")]
+        public PtBR PtBR {
+            get; set;
+        }
+
+        [JsonPropertyName("ru-RU")]
+        public RuRU RuRU {
+            get; set;
+        }
+    }
+
+    public class AdaptiveHls {
+        public Softsub softsub {
+            get; set;
+        }
+
+        [JsonPropertyName("ar-ME")]
+        public ArME ArME {
+            get; set;
+        }
+
+        [JsonPropertyName("de-DE")]
+        public DeDE DeDE {
+            get; set;
+        }
+
+        [JsonPropertyName("en-US")]
+        public EnUS EnUS {
+            get; set;
+        }
+
+        [JsonPropertyName("es-ES")]
+        public EsES EsES {
+            get; set;
+        }
+
+        [JsonPropertyName("es-LA")]
+        public EsLA EsLA {
+            get; set;
+        }
+
+        [JsonPropertyName("fr-FR")]
+        public FrFR FrFR {
+            get; set;
+        }
+
+        [JsonPropertyName("it-IT")]
+        public ItIT ItIT {
+            get; set;
+        }
+
+        [JsonPropertyName("pt-BR")]
+        public PtBR PtBR {
+            get; set;
+        }
+
+        [JsonPropertyName("ru-RU")]
+        public RuRU RuRU {
+            get; set;
+        }
+    }
+
+    public class DownloadHls {
+        public Softsub softsub {
+            get; set;
+        }
+    }
+
+    public class DrmAdaptiveDash {
+        public Softsub softsub {
+            get; set;
+        }
+
+        [JsonPropertyName("ar-ME")]
+        public ArME ArME {
+            get; set;
+        }
+
+        [JsonPropertyName("de-DE")]
+        public DeDE DeDE {
+            get; set;
+        }
+
+        [JsonPropertyName("en-US")]
+        public EnUS EnUS {
+            get; set;
+        }
+
+        [JsonPropertyName("es-ES")]
+        public EsES EsES {
+            get; set;
+        }
+
+        [JsonPropertyName("es-LA")]
+        public EsLA EsLA {
+            get; set;
+        }
+
+        [JsonPropertyName("fr-FR")]
+        public FrFR FrFR {
+            get; set;
+        }
+
+        [JsonPropertyName("it-IT")]
+        public ItIT ItIT {
+            get; set;
+        }
+
+        [JsonPropertyName("pt-BR")]
+        public PtBR PtBR {
+            get; set;
+        }
+
+        [JsonPropertyName("ru-RU")]
+        public RuRU RuRU {
+            get; set;
+        }
+    }
+
+    public class DrmAdaptiveHls {
+        public Softsub softsub {
+            get; set;
+        }
+
+        [JsonPropertyName("ar-ME")]
+        public ArME ArME {
+            get; set;
+        }
+
+        [JsonPropertyName("de-DE")]
+        public DeDE DeDE {
+            get; set;
+        }
+
+        [JsonPropertyName("en-US")]
+        public EnUS EnUS {
+            get; set;
+        }
+
+        [JsonPropertyName("es-ES")]
+        public EsES EsES {
+            get; set;
+        }
+
+        [JsonPropertyName("es-LA")]
+        public EsLA EsLA {
+            get; set;
+        }
+
+        [JsonPropertyName("fr-FR")]
+        public FrFR FrFR {
+            get; set;
+        }
+
+        [JsonPropertyName("it-IT")]
+        public ItIT ItIT {
+            get; set;
+        }
+
+        [JsonPropertyName("pt-BR")]
+        public PtBR PtBR {
+            get; set;
+        }
+
+        [JsonPropertyName("ru-RU")]
+        public RuRU RuRU {
+            get; set;
+        }
+    }
+
+    public class DrmDownloadHls {
+        public Softsub softsub {
+            get; set;
+        }
+    }
+
+    public class DrmMultitrackAdaptiveHlsV2 {
+        public Softsub softsub {
+            get; set;
+        }
+
+        [JsonPropertyName("ar-ME")]
+        public ArME ArME {
+            get; set;
+        }
+
+        [JsonPropertyName("de-DE")]
+        public DeDE DeDE {
+            get; set;
+        }
+
+        [JsonPropertyName("en-US")]
+        public EnUS EnUS {
+            get; set;
+        }
+
+        [JsonPropertyName("es-ES")]
+        public EsES EsES {
+            get; set;
+        }
+
+        [JsonPropertyName("es-LA")]
+        public EsLA EsLA {
+            get; set;
+        }
+
+        [JsonPropertyName("fr-FR")]
+        public FrFR FrFR {
+            get; set;
+        }
+
+        [JsonPropertyName("it-IT")]
+        public ItIT ItIT {
+            get; set;
+        }
+
+        [JsonPropertyName("pt-BR")]
+        public PtBR PtBR {
+            get; set;
+        }
+
+        [JsonPropertyName("ru-RU")]
+        public RuRU RuRU {
+            get; set;
+        }
+    }
+
+    public class MultitrackAdaptiveHlsV2 {
+        public Softsub softsub {
+            get; set;
+        }
+
+        [JsonPropertyName("ar-ME")]
+        public ArME ArME {
+            get; set;
+        }
+
+        [JsonPropertyName("de-DE")]
+        public DeDE DeDE {
+            get; set;
+        }
+
+        [JsonPropertyName("en-US")]
+        public EnUS EnUS {
+            get; set;
+        }
+
+        [JsonPropertyName("es-ES")]
+        public EsES EsES {
+            get; set;
+        }
+
+        [JsonPropertyName("es-LA")]
+        public EsLA EsLA {
+            get; set;
+        }
+
+        [JsonPropertyName("fr-FR")]
+        public FrFR FrFR {
+            get; set;
+        }
+
+        [JsonPropertyName("it-IT")]
+        public ItIT ItIT {
+            get; set;
+        }
+
+        [JsonPropertyName("pt-BR")]
+        public PtBR PtBR {
+            get; set;
+        }
+
+        [JsonPropertyName("ru-RU")]
+        public RuRU RuRU {
+            get; set;
+        }
+    }
+
+    public class Urls {
+        public Softsub softsub {
+            get; set;
+        }
+    }
+
+    public class VoAdaptiveDash {
+        public Softsub softsub {
+            get; set;
+        }
+
+        [JsonPropertyName("ar-ME")]
+        public ArME ArME {
+            get; set;
+        }
+
+        [JsonPropertyName("de-DE")]
+        public DeDE DeDE {
+            get; set;
+        }
+
+        [JsonPropertyName("en-US")]
+        public EnUS EnUS {
+            get; set;
+        }
+
+        [JsonPropertyName("es-ES")]
+        public EsES EsES {
+            get; set;
+        }
+
+        [JsonPropertyName("es-LA")]
+        public EsLA EsLA {
+            get; set;
+        }
+
+        [JsonPropertyName("fr-FR")]
+        public FrFR FrFR {
+            get; set;
+        }
+
+        [JsonPropertyName("it-IT")]
+        public ItIT ItIT {
+            get; set;
+        }
+
+        [JsonPropertyName("pt-BR")]
+        public PtBR PtBR {
+            get; set;
+        }
+
+        [JsonPropertyName("ru-RU")]
+        public RuRU RuRU {
+            get; set;
+        }
+    }
+
+    public class VoAdaptiveHls {
+        public Softsub softsub {
+            get; set;
+        }
+
+        [JsonPropertyName("ar-ME")]
+        public ArME ArME {
+            get; set;
+        }
+
+        [JsonPropertyName("de-DE")]
+        public DeDE DeDE {
+            get; set;
+        }
+
+        [JsonPropertyName("en-US")]
+        public EnUS EnUS {
+            get; set;
+        }
+
+        [JsonPropertyName("es-ES")]
+        public EsES EsES {
+            get; set;
+        }
+
+        [JsonPropertyName("es-LA")]
+        public EsLA EsLA {
+            get; set;
+        }
+
+        [JsonPropertyName("fr-FR")]
+        public FrFR FrFR {
+            get; set;
+        }
+
+        [JsonPropertyName("it-IT")]
+        public ItIT ItIT {
+            get; set;
+        }
+
+        [JsonPropertyName("pt-BR")]
+        public PtBR PtBR {
+            get; set;
+        }
+
+        [JsonPropertyName("ru-RU")]
+        public RuRU RuRU {
+            get; set;
+        }
+    }
+
+    public class VoDrmAdaptiveDash {
+        public Softsub softsub {
+            get; set;
+        }
+
+        [JsonPropertyName("ar-ME")]
+        public ArME ArME {
+            get; set;
+        }
+
+        [JsonPropertyName("de-DE")]
+        public DeDE DeDE {
+            get; set;
+        }
+
+        [JsonPropertyName("en-US")]
+        public EnUS EnUS {
+            get; set;
+        }
+
+        [JsonPropertyName("es-ES")]
+        public EsES EsES {
+            get; set;
+        }
+
+        [JsonPropertyName("es-LA")]
+        public EsLA EsLA {
+            get; set;
+        }
+
+        [JsonPropertyName("fr-FR")]
+        public FrFR FrFR {
+            get; set;
+        }
+
+        [JsonPropertyName("it-IT")]
+        public ItIT ItIT {
+            get; set;
+        }
+
+        [JsonPropertyName("pt-BR")]
+        public PtBR PtBR {
+            get; set;
+        }
+
+        [JsonPropertyName("ru-RU")]
+        public RuRU RuRU {
+            get; set;
+        }
+    }
+
+    public class VoDrmAdaptiveHls {
+        public Softsub softsub {
+            get; set;
+        }
+
+        [JsonPropertyName("ar-ME")]
+        public ArME ArME {
+            get; set;
+        }
+
+        [JsonPropertyName("de-DE")]
+        public DeDE DeDE {
+            get; set;
+        }
+
+        [JsonPropertyName("en-US")]
+        public EnUS EnUS {
+            get; set;
+        }
+
+        [JsonPropertyName("es-ES")]
+        public EsES EsES {
+            get; set;
+        }
+
+        [JsonPropertyName("es-LA")]
+        public EsLA EsLA {
+            get; set;
+        }
+
+        [JsonPropertyName("fr-FR")]
+        public FrFR FrFR {
+            get; set;
+        }
+
+        [JsonPropertyName("it-IT")]
+        public ItIT ItIT {
+            get; set;
+        }
+
+        [JsonPropertyName("pt-BR")]
+        public PtBR PtBR {
+            get; set;
+        }
+
+        [JsonPropertyName("ru-RU")]
+        public RuRU RuRU {
+            get; set;
+        }
+    }
+
+    public class Streams {
+        public AdaptiveDash adaptive_dash {
+            get; set;
+        }
+        public AdaptiveHls adaptive_hls {
+            get; set;
+        }
+        public DownloadHls download_hls {
+            get; set;
+        }
+        public DrmAdaptiveDash drm_adaptive_dash {
+            get; set;
+        }
+        public DrmAdaptiveHls drm_adaptive_hls {
+            get; set;
+        }
+        public DrmDownloadHls drm_download_hls {
+            get; set;
+        }
+        public DrmMultitrackAdaptiveHlsV2 drm_multitrack_adaptive_hls_v2 {
+            get; set;
+        }
+        public MultitrackAdaptiveHlsV2 multitrack_adaptive_hls_v2 {
+            get; set;
+        }
+        public Urls urls {
+            get; set;
+        }
+        public VoAdaptiveDash vo_adaptive_dash {
+            get; set;
+        }
+        public VoAdaptiveHls vo_adaptive_hls {
+            get; set;
+        }
+        public VoDrmAdaptiveDash vo_drm_adaptive_dash {
+            get; set;
+        }
+        public VoDrmAdaptiveHls vo_drm_adaptive_hls {
+            get; set;
+        }
+    }
+
+    public class StreamLinks {
+        public string __class__ {
+            get; set;
+        }
+        public string __href__ {
+            get; set;
+        }
+        public string __resource_key__ {
+            get; set;
+        }
+        public Links __links__ {
+            get; set;
+        }
+        public Actions __actions__ {
+            get; set;
+        }
+        public string media_id {
+            get; set;
+        }
+        public string audio_locale {
+            get; set;
+        }
+        public Subtitles subtitles {
+            get; set;
+        }
+        public Captions captions {
+            get; set;
+        }
+        public Streams streams {
+            get; set;
+        }
+        public List<string> bifs {
+            get; set;
+        }
+    }
     public class User {
         public string @class {
             get; set;
@@ -137,6 +958,226 @@ namespace Kamyroll_CSharp_Obj {
 
 namespace Kamyroll_CSharp {
 
+    public class Links {
+        [JsonPropertyName("episode/season")]
+        public EpisodeSeason EpisodeSeason {
+            get; set;
+        }
+
+        [JsonPropertyName("episode/series")]
+        public EpisodeSeries EpisodeSeries {
+            get; set;
+        }
+        public Resource resource {
+            get; set;
+        }
+
+        [JsonPropertyName("resource/channel")]
+        public ResourceChannel ResourceChannel {
+            get; set;
+        }
+        public Streams streams {
+            get; set;
+        }
+    }
+
+    public class Actions {
+    }
+
+    public class EpisodeSeason {
+        public string href {
+            get; set;
+        }
+    }
+
+    public class EpisodeSeries {
+        public string href {
+            get; set;
+        }
+    }
+
+    public class Resource {
+        public string href {
+            get; set;
+        }
+    }
+
+    public class ResourceChannel {
+        public string href {
+            get; set;
+        }
+    }
+
+    public class Streams {
+        public string href {
+            get; set;
+        }
+    }
+
+    public class Thumbnail {
+        public int width {
+            get; set;
+        }
+        public int height {
+            get; set;
+        }
+        public string type {
+            get; set;
+        }
+        public string source {
+            get; set;
+        }
+    }
+
+    public class Images {
+        public List<List<Thumbnail>> thumbnail {
+            get; set;
+        }
+    }
+
+    public class EpisodeMetadata {
+        public string series_id {
+            get; set;
+        }
+        public string series_title {
+            get; set;
+        }
+        public string season_id {
+            get; set;
+        }
+        public string season_title {
+            get; set;
+        }
+        public int season_number {
+            get; set;
+        }
+        public int episode_number {
+            get; set;
+        }
+        public string episode {
+            get; set;
+        }
+        public int sequence_number {
+            get; set;
+        }
+        public int duration_ms {
+            get; set;
+        }
+        public DateTime episode_air_date {
+            get; set;
+        }
+        public bool is_premium_only {
+            get; set;
+        }
+        public bool is_mature {
+            get; set;
+        }
+        public bool mature_blocked {
+            get; set;
+        }
+        public bool is_subbed {
+            get; set;
+        }
+        public bool is_dubbed {
+            get; set;
+        }
+        public bool is_clip {
+            get; set;
+        }
+        public bool available_offline {
+            get; set;
+        }
+        public List<string> maturity_ratings {
+            get; set;
+        }
+        public List<string> subtitle_locales {
+            get; set;
+        }
+        public string availability_notes {
+            get; set;
+        }
+    }
+
+    public class Item {
+        public string __class__ {
+            get; set;
+        }
+        public string __href__ {
+            get; set;
+        }
+        public Links __links__ {
+            get; set;
+        }
+        public Actions __actions__ {
+            get; set;
+        }
+        public string id {
+            get; set;
+        }
+        public string external_id {
+            get; set;
+        }
+        public string channel_id {
+            get; set;
+        }
+        public string title {
+            get; set;
+        }
+        public string description {
+            get; set;
+        }
+        public string promo_title {
+            get; set;
+        }
+        public string promo_description {
+            get; set;
+        }
+        public string type {
+            get; set;
+        }
+        public string slug {
+            get; set;
+        }
+        public string slug_title {
+            get; set;
+        }
+        public Images images {
+            get; set;
+        }
+        public EpisodeMetadata episode_metadata {
+            get; set;
+        }
+        public string playback {
+            get; set;
+        }
+        public string linked_resource_key {
+            get; set;
+        }
+    }
+
+    public class StreamInfo {
+        public string __class__ {
+            get; set;
+        }
+        public string __href__ {
+            get; set;
+        }
+        public string __resource_key__ {
+            get; set;
+        }
+        public Links __links__ {
+            get; set;
+        }
+        public Actions __actions__ {
+            get; set;
+        }
+        public int total {
+            get; set;
+        }
+        public List<Item> items {
+            get; set;
+        }
+    }
     public class LoginData {
         public string session_id {
             get; set;
@@ -342,12 +1383,49 @@ namespace Kamyroll_CSharp {
         }
     }
 
+    public class ConfigObject {
+        public string session_id {
+            get; set;
+        }
+        public string etp_rt {
+            get; set;
+        }
+        public bool us_unblocker {
+            get; set;
+        }
+        public string channel {
+            get; set;
+        }
+        public string country_code {
+            get; set;
+        }
+        public string maturity_rating {
+            get; set;
+        }
+        public string policy {
+            get; set;
+        }
+        public string signature {
+            get; set;
+        }
+        public string key_pair_id {
+            get; set;
+        }
+        public string account_id {
+            get; set;
+        }
+        public string external_id {
+            get; set;
+        }
+    }
+
 
     class Program {
         static HttpClient client = new HttpClient();
         static string tokenTypeG = "";
         static string accessTokenG = "";
         static string linkdownload = "";
+        static ConfigObject config = new ConfigObject();
 
         static void Main(string[] args) {
 
@@ -360,14 +1438,7 @@ namespace Kamyroll_CSharp {
             if (arguments.Contains("--login")) {
                 LoginAsync(arguments[indexLogin], arguments.Contains("--us_unblocker")).Wait();
 
-                //Download(linkdownload);
-                //from link extract episode code example: https://beta.crunchyroll.com/it/watch/GN7UDWD1J/Ambizioni-e-scelte
-                // GN7UDWD1J
-                //api call to base url:
-                //https://beta-api.crunchyroll.com/cms/v2/country_code/maturity_rating/channel/objects/episodecode?locale=getlocale&Signature=signature&Policy=policy&Key-Pair-Id=key_pair_id
-                //getlocale (from country code) locale = "en-US" countries = ["", "JP", "US", "LA", "ES", "FR", "BR", "IT", "DE", "RU", "ME"] locales = ["", "ja-JP", "en-US", "es-LA", "es-ES", "fr-FR", "pt-BR", "it-IT", "de-DE", "ru-RU", "ar-ME"]
-                //response.items[0].__links__.streams.href
-                //from here we can continue with the original code
+                DownloadAsync(linkdownload).Wait();
             } else {
                 System.Diagnostics.Debug.WriteLine("Login or session required");
             }
@@ -471,8 +1542,17 @@ namespace Kamyroll_CSharp {
             CrAccount crAccount = JsonSerializer.Deserialize<CrAccount>(responsestring);
             var maturity_rating = crAccount.maturity_rating;
 
-            //create Config Object
-            // session_id etp_rt us_unblocker channel country_code maturity_rating policy signature key_pair_id account_id external_id
+            config.session_id = session_id;
+            config.etp_rt = etp_rt;
+            config.us_unblocker = us_unblocker;
+            config.channel = channel;
+            config.country_code = country_code;
+            config.maturity_rating = maturity_rating;
+            config.policy = policy;
+            config.signature = signature;
+            config.key_pair_id = key_pair_id;
+            config.account_id = account_id;
+            config.external_id = external_id;
         }
 
         public static async Task GetHeadersAsync(string session_id, string etp_rt, bool us_unblocker) {
@@ -507,165 +1587,85 @@ namespace Kamyroll_CSharp {
             }
         }
 
-        //public static object get_formats(object arg_formats) {
-        //    object id;
-        //    object type;
-        //    streams_id = arg_formats;
-        //    var config = get_config();
-        //    var endpoint = "https://beta-api.crunchyroll.com/cms/v2/{}/{}/{}/videos/{}/streams?locale={}&Signature={}&Policy={}&Key-Pair-Id={}".format(config.get("country_code"), config.get("maturity_rating"), config.get("channel"), streams_id, get_locale(), config.get("signature"), config.get("policy"), config.get("key_pair_id"));
-        //    var r = requests.get(endpoint);
-        //    var href = r.json().get("__links__").get("resource").get("href");
-        //    if (href.Contains("movies")) {
-        //        type = "movies";
-        //        id = href.split("movies/")[1].split("/")[0].strip();
-        //    } else {
-        //        type = "episodes";
-        //        id = href.split("episodes/")[1].split("/")[0].strip();
-        //    }
-        //    init_download(type, id);
-        //    audio_locale = r.json().get("audio_locale");
-        //    formats_subtitles(get_items(r.json().get("subtitles")));
-        //    formats_videos(get_items(r.json().get("streams").get("adaptive_hls")));
-        //}
+        public static async Task DownloadAsync(string linkdownload) {
+            string episodecode = linkdownload.Split("/")[5];
+            string endpoint = "https://beta-api.crunchyroll.com/cms/v2/" + config.country_code + "/" + config.maturity_rating + "/" + config.channel + "/objects/" + episodecode + "?locale=" + GetLocale(config.country_code) + "&Signature=" + config.signature + "&Policy=" + config.policy + "&Key-Pair-Id=" + config.key_pair_id;
+            try {
+                HttpResponseMessage response = await client.GetAsync(endpoint);
+                string responsestring = await response.Content.ReadAsStringAsync();
+                StreamInfo streamInfo = JsonSerializer.Deserialize<StreamInfo>(responsestring);
+                string streamid = streamInfo.items[0].__links__.streams.href.Split("/")[7] + "/" + streamInfo.items[0].__links__.streams.href.Split("/")[8];
+                endpoint = "https://beta-api.crunchyroll.com/cms/v2/" + config.country_code + "/" + config.maturity_rating + "/" + config.channel + "/videos/" + streamid + "?locale=" + GetLocale(config.country_code) + "&Signature=" + config.signature + "&Policy=" + config.policy + "&Key-Pair-Id=" + config.key_pair_id;
+                response = await client.GetAsync(endpoint);
+                responsestring = await response.Content.ReadAsStringAsync();
+                responsestring = responsestring.Replace("\"\":", "\"softsub\":");
+                Kamyroll_CSharp_Obj.StreamLinks streamLinks = JsonSerializer.Deserialize<Kamyroll_CSharp_Obj.StreamLinks>(responsestring);
+                endpoint = streamLinks.streams.adaptive_hls.softsub.url;
+                response = await client.GetAsync(endpoint);
+                responsestring = await response.Content.ReadAsStringAsync();
+                Console.WriteLine("http" + responsestring.Split("RESOLUTION=1920x1080")[1].Split("http")[1].Split("#EXT-X-STREAM")[0].Replace(System.Environment.NewLine, ""));
+                string subLang = GetLocale(config.country_code);
+                switch (subLang) {
+                    case "es-LA":
+                        endpoint = streamLinks.subtitles.EsLA.url;
+                        break;
+                    case "es-ES":
+                        endpoint = streamLinks.subtitles.EsES.url;
+                        break;
+                    case "fr-FR":
+                        endpoint = streamLinks.subtitles.FrFR.url;
+                        break;
+                    case "pt-BR":
+                        endpoint = streamLinks.subtitles.PtBR.url;
+                        break;
+                    case "it-IT":
+                        endpoint = streamLinks.subtitles.ItIT.url;
+                        break;
+                    case "de-DE":
+                        endpoint = streamLinks.subtitles.DeDE.url;
+                        break;
+                    case "ru-RU":
+                        endpoint = streamLinks.subtitles.RuRU.url;
+                        break;
+                    case "ar-ME":
+                        endpoint = streamLinks.subtitles.ArME.url;
+                        break;
+                    default:
+                        endpoint = streamLinks.subtitles.EnUS.url;
+                        break;
+                }
+                
+                response = await client.GetAsync(endpoint);
+                responsestring = await response.Content.ReadAsStringAsync();
+                Console.WriteLine(responsestring);
+            } catch (Exception e) {
+                System.Diagnostics.Debug.WriteLine(e.Message);
+            }
+        }
 
-        //public static object init_download(object type, object id) {
-        //    object title;
-        //    var config = get_config();
-        //    var endpoint = "https://beta-api.crunchyroll.com/cms/v2/{}/{}/{}/{}/{}?locale={}&Signature={}&Policy={}&Key-Pair-Id={}".format(config.get("country_code"), config.get("maturity_rating"), config.get("channel"), type, id, get_locale(), config.get("signature"), config.get("policy"), config.get("key_pair_id"));
-        //    var r = requests.get(endpoint);
-        //    if (type == "movies") {
-        //        title = r.json().get("title");
-        //        var thumbnails = json.dumps(r.json().get("images").get("thumbnail")).replace("[", "").replace("]", "");
-        //        var thumbnail = json.loads("[{}]".format(thumbnails));
-        //        dl_path = check_characters(title);
-        //        dl_title = check_characters(title);
-        //        dl_cover = thumbnail[thumbnail.Count - 1].get("source");
-        //    } else {
-        //        var series_id = r.json().get("series_id");
-        //        var series_title = r.json().get("series_title");
-        //        var season_title = r.json().get("season_title");
-        //        var season_number = r.json().get("season_number");
-        //        var episode = r.json().get("episode");
-        //        title = r.json().get("title");
-        //        endpoint = "https://beta-api.crunchyroll.com/cms/v2/{}/{}/{}/series/{}?locale={}&Signature={}&Policy={}&Key-Pair-Id={}".format(config.get("country_code"), config.get("maturity_rating"), config.get("channel"), series_id, get_locale(), config.get("signature"), config.get("policy"), config.get("key_pair_id"));
-        //        r = requests.get(endpoint);
-        //        var poster_tall = json.dumps(r.json().get("images").get("poster_tall")).replace("[", "").replace("]", "");
-        //        var poster = json.loads("[{}]".format(poster_tall));
-        //        dl_path = check_characters("{}/S{} - {}".format(series_title, season_number, season_title));
-        //        dl_title = check_characters("[S{}.Ep{}] {} - {}".format(season_number, episode, series_title, title));
-        //        dl_cover = poster[poster.Count - 1].get("source");
-        //    }
-        //}
-
-        //public static object formats_subtitles(object items) {
-        //    subtitles_format_code = new List<object>();
-        //    var locale = new List<object>();
-        //    subtitles_url = new List<object>();
-        //    subtitles_extension = new List<object>();
-        //    foreach (var item in items) {
-        //        locale.append(item.get("locale"));
-        //        subtitles_url.append(item.get("url"));
-        //        subtitles_extension.append(item.get("format"));
-        //        subtitles_format_code.append("{}-subtitles-{}".format(streams_id, item.get("locale")));
-        //    }
-        //    if (display) {
-        //        Console.WriteLine("\n[debug] Subtitles for {}:".format(streams_id));
-        //        Console.WriteLine("{0:<40} {1:<20} {2:<20}".format("Format code", "Extension", "Language"));
-        //        foreach (var i in Enumerable.Range(0, locale.Count)) {
-        //            Console.WriteLine("{0:<40} {1:<20} {2:<20}".format(subtitles_format_code[i], subtitles_extension[i], get_locale_title(locale[i])));
-        //        }
-        //    }
-        //}
-
-        //public static object formats_videos(object items) {
-        //    videos_format_code = new List<object>();
-        //    var resolutions = new List<object>();
-        //    var note = new List<object>();
-        //    videos_url = new List<object>();
-        //    var index = 1;
-        //    foreach (var item in items) {
-        //        var hardsub_locale = item.get("hardsub_locale");
-        //        var r = requests.get(item.get("url"));
-        //        var streams = r.text.split("#EXT-X-STREAM");
-        //        foreach (var stream in streams) {
-        //            if (stream.Contains("RESOLUTION")) {
-        //                var bandwidth = stream.split("BANDWIDTH=")[1].split(",")[0].strip();
-        //                var resolution = stream.split("RESOLUTION=")[1].split(",")[0].strip();
-        //                var frame_rate = stream.split("FRAME-RATE=")[1].split(",")[0].strip();
-        //                var codecs = stream.split("CODECS=\"")[1].split("\"")[0].strip();
-        //                var url = "http{}".format(stream.split("http")[1].strip());
-        //                var format = "{}-video".format(streams_id);
-        //                if (hardsub_locale != "") {
-        //                    format = "{}-hardsub-{}".format(format, hardsub_locale);
-        //                }
-        //                format = "{}-{}".format(format, index);
-        //                videos_format_code.append(format);
-        //                resolutions.append(resolution);
-        //                note.append("[{}] {}k , {}, {}, {}".format(audio_locale, bandwidth, codecs.split(",")[0].strip(), frame_rate, codecs.split(",")[1].strip()));
-        //                videos_url.append(url);
-        //                index += 1;
-        //            }
-        //        }
-        //    }
-        //    if (display) {
-        //        Console.WriteLine("\n[debug] Videos for {}:".format(streams_id));
-        //        Console.WriteLine("{0:<40} {1:<20} {2:<20} {3:<40}".format("Format code", "Extension", "Resolution", "Note"));
-        //        foreach (var i in Enumerable.Range(0, videos_format_code.Count)) {
-        //            Console.WriteLine("{0:<40} {1:<20} {2:<20} {3:<40}".format(videos_format_code[i], "mp4", resolutions[i], note[i]));
-        //        }
-        //    }
-        //}
-
-        //public static object download(object args_download, object args_format) {
-        //    var stream_id = args_download;
-        //    dl_format = args_format;
-        //    Console.WriteLine("[debug] Loading formats");
-        //    get_formats(stream_id);
-        //    dl_url = "";
-        //    dl_extension = "";
-        //    if (dl_format.Contains("video")) {
-        //        foreach (var i in Enumerable.Range(0, videos_format_code.Count)) {
-        //            if (dl_format == videos_format_code[i]) {
-        //                dl_url = videos_url[i];
-        //                dl_extension = "mp4";
-        //                break;
-        //            }
-        //        }
-        //    } else if (dl_format.Contains("subtitles")) {
-        //        foreach (var i in Enumerable.Range(0, subtitles_format_code.Count)) {
-        //            if (dl_format == subtitles_format_code[i]) {
-        //                dl_url = subtitles_url[i];
-        //                dl_extension = subtitles_extension[i];
-        //                break;
-        //            }
-        //        }
-        //    } else {
-        //        Console.WriteLine("ERROR: Format not found");
-        //        sys.exit(0);
-        //    }
-        //    if (dl_url != "" && dl_extension != "") {
-        //        create_folder();
-        //        download_cover();
-        //        if (dl_format.Contains("video")) {
-        //            download_video();
-        //        } else {
-        //            download_subtitles();
-        //        }
-        //    } else {
-        //        Console.WriteLine("ERROR: Data loading error");
-        //        sys.exit(0);
-        //    }
-        //}
-
-        //public static object download_cover() {
-        //    if (os.path.isfile("{}\\{}\\cover.jpg".format(dl_root, dl_path))) {
-        //        os.remove("{}\\{}\\cover.jpg".format(dl_root, dl_path));
-        //    }
-        //    Console.WriteLine("[debug] Cover download");
-        //    var response = requests.get(dl_cover);
-        //    var file = open("{}\\{}\\cover.jpg".format(dl_root, dl_path), "wb");
-        //    file.write(response.content);
-        //    file.close();
-        //}
+        private static string GetLocale(string countrycode) {
+            switch (countrycode) {
+                case "JP":
+                    return "ja-JP";
+                case "LA":
+                    return "es-LA";
+                case "ES":
+                    return "es-ES";
+                case "FR":
+                    return "fr-FR";
+                case "BR":
+                    return "pt-BR";
+                case "IT":
+                    return "it-IT";
+                case "DE":
+                    return "de-DE";
+                case "RU":
+                    return "ru-RU";
+                case "ME":
+                    return "ar-ME";
+                default:
+                    return "en-US";
+            }
+        }
     }
 }
