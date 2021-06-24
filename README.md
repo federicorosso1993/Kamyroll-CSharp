@@ -1,4 +1,4 @@
-<img src="https://github.com/federicorosso1993/Kamyroll-CSharp/blob/main/img_title.png" width="20%"></img>
+<img src="https://github.com/federicorosso1993/Kamyroll-CSharp/blob/master/img_title.png" width="20%"></img>
 
 ## Description
 Simple C# conversion of https://github.com/hyugogirubato/Kamyroll-Python
