@@ -1451,12 +1451,12 @@ namespace Kamyroll_CSharp {
             }
             dlPath = dlPath.Substring(0, dlPath.Length - 1);
 
-            if (arguments.Contains("--login")) {
+            if (arguments.Contains("--login") && linkdownload != "") {
                 LoginAsync(arguments[indexLogin]).Wait();
 
                 DownloadAsync(linkdownload).Wait();
             } else {
-                System.Diagnostics.Debug.WriteLine("Login or session required");
+                Console.WriteLine("Login and download link required");
             }
         }
 
