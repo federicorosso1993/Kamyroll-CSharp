@@ -7,6 +7,9 @@ using System.Text.Json;
 using System.Net;
 using System.Net.Http.Headers;
 using System.Text.Json.Serialization;
+using System.IO;
+using System.Reflection;
+using System.Diagnostics;
 
 namespace Kamyroll_CSharp_Obj {
     public class Resource {
@@ -1390,9 +1393,6 @@ namespace Kamyroll_CSharp {
         public string etp_rt {
             get; set;
         }
-        public bool us_unblocker {
-            get; set;
-        }
         public string channel {
             get; set;
         }
@@ -1425,6 +1425,8 @@ namespace Kamyroll_CSharp {
         static string tokenTypeG = "";
         static string accessTokenG = "";
         static string linkdownload = "";
+        static string youtubeDlPath = "";
+        static string dlPath = "";
         static ConfigObject config = new ConfigObject();
 
         static void Main(string[] args) {
@@ -1435,8 +1437,22 @@ namespace Kamyroll_CSharp {
             int indexLink = arguments.FindIndex(a => a.Contains("--download")) + 1;
             linkdownload = arguments[indexLink];
 
+            int indexYoutubeDlPath = arguments.FindIndex(a => a.Contains("--youtubedlpath")) + 1;
+            while (!arguments[indexYoutubeDlPath].Contains("--")) {
+                youtubeDlPath = youtubeDlPath + arguments[indexYoutubeDlPath] + " ";
+                indexYoutubeDlPath++;
+            }
+            youtubeDlPath = youtubeDlPath.Substring(0, youtubeDlPath.Length - 1);
+
+            int indexDlPath = arguments.FindIndex(a => a.Contains("--dlpath")) + 1;
+            while (!arguments[indexDlPath].Contains("--")) {
+                dlPath = dlPath + arguments[indexDlPath] + " ";
+                indexDlPath++;
+            }
+            dlPath = dlPath.Substring(0, dlPath.Length - 1);
+
             if (arguments.Contains("--login")) {
-                LoginAsync(arguments[indexLogin], arguments.Contains("--us_unblocker")).Wait();
+                LoginAsync(arguments[indexLogin]).Wait();
 
                 DownloadAsync(linkdownload).Wait();
             } else {
@@ -1444,8 +1460,7 @@ namespace Kamyroll_CSharp {
             }
         }
 
-        public static async Task LoginAsync(string args_login, bool us_unblocker) {
-            HttpClient clientProxy = null;
+        public static async Task LoginAsync(string args_login) {
             string email = "";
             string password = "";
             try {
@@ -1459,15 +1474,6 @@ namespace Kamyroll_CSharp {
                 HttpResponseMessage response = await client.GetAsync(endpoint);
                 string responsestring = await response.Content.ReadAsStringAsync();
                 CrSession crSession = JsonSerializer.Deserialize<CrSession>(responsestring);
-                if (us_unblocker) {
-                    var handler = new HttpClientHandler();
-                    var httpClientHandler = new HttpClientHandler {
-                        Proxy = new WebProxy("http://149.28.96.242:3128", false),
-                        UseProxy = true
-                    };
-
-                    clientProxy = new HttpClient(handler);
-                }
                 var session_id = crSession.data.session_id;
                 endpoint = "https://api.crunchyroll.com/login.0.json";
                 var data = new Dictionary<string, string> {
@@ -1482,15 +1488,15 @@ namespace Kamyroll_CSharp {
                     password}
                 };
 
-                HttpResponseMessage response2 = await (us_unblocker ? clientProxy.PostAsync(endpoint, new FormUrlEncodedContent(data)) : client.PostAsync(endpoint, new FormUrlEncodedContent(data)));
+                HttpResponseMessage response2 = await client.PostAsync(endpoint, new FormUrlEncodedContent(data));
                 responsestring = await response2.Content.ReadAsStringAsync();
-                StartSessionAsync(session_id, us_unblocker).Wait();
+                StartSessionAsync(session_id).Wait();
             } catch (Exception e) {
                 System.Diagnostics.Debug.WriteLine(e.Message);
             }
         }
 
-        public static async Task StartSessionAsync(string session_id, bool us_unblocker) {
+        public static async Task StartSessionAsync(string session_id) {
             string channel = "";
             var endpoint = "https://api.crunchyroll.com/start_session.0.json?session_id=" + session_id;
             var cookieContainer = new CookieContainer();
@@ -1518,7 +1524,7 @@ namespace Kamyroll_CSharp {
                 channel = "crunchyroll";
             }
 
-            GetHeadersAsync(session_id, etp_rt, us_unblocker).Wait();
+            GetHeadersAsync(session_id, etp_rt).Wait();
             
             endpoint = "https://beta-api.crunchyroll.com/index/v2";
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(tokenTypeG, accessTokenG);
@@ -1544,7 +1550,6 @@ namespace Kamyroll_CSharp {
 
             config.session_id = session_id;
             config.etp_rt = etp_rt;
-            config.us_unblocker = us_unblocker;
             config.channel = channel;
             config.country_code = country_code;
             config.maturity_rating = maturity_rating;
@@ -1555,7 +1560,7 @@ namespace Kamyroll_CSharp {
             config.external_id = external_id;
         }
 
-        public static async Task GetHeadersAsync(string session_id, string etp_rt, bool us_unblocker) {
+        public static async Task GetHeadersAsync(string session_id, string etp_rt) {
             var endpoint = "https://beta-api.crunchyroll.com/auth/v1/token";
             var data = new Dictionary<string, string> {
                 {
@@ -1565,10 +1570,7 @@ namespace Kamyroll_CSharp {
             
             var cookieContainer = new CookieContainer();
             var handler = new HttpClientHandler() { CookieContainer = cookieContainer };
-            if (us_unblocker) {
-                handler.Proxy = new WebProxy("http://149.28.96.242:3128", false);
-                handler.UseProxy = true;
-            }
+            
             var client2 = new HttpClient(handler);
             client2.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", "bm9haWhkZXZtXzZpeWcwYThsMHE6");
             cookieContainer.Add(new Uri(endpoint), new Cookie("session_id", session_id));
@@ -1594,6 +1596,9 @@ namespace Kamyroll_CSharp {
                 HttpResponseMessage response = await client.GetAsync(endpoint);
                 string responsestring = await response.Content.ReadAsStringAsync();
                 StreamInfo streamInfo = JsonSerializer.Deserialize<StreamInfo>(responsestring);
+                string serietitle = streamInfo.items[0].episode_metadata.season_title;
+                string title = streamInfo.items[0].title;
+                string episodenumber = config.country_code == "IT" ? "Episodio " + streamInfo.items[0].episode_metadata.episode_number : "Episode " + streamInfo.items[0].episode_metadata.episode_number;
                 string streamid = streamInfo.items[0].__links__.streams.href.Split("/")[7] + "/" + streamInfo.items[0].__links__.streams.href.Split("/")[8];
                 endpoint = "https://beta-api.crunchyroll.com/cms/v2/" + config.country_code + "/" + config.maturity_rating + "/" + config.channel + "/videos/" + streamid + "?locale=" + GetLocale(config.country_code) + "&Signature=" + config.signature + "&Policy=" + config.policy + "&Key-Pair-Id=" + config.key_pair_id;
                 response = await client.GetAsync(endpoint);
@@ -1603,41 +1608,78 @@ namespace Kamyroll_CSharp {
                 endpoint = streamLinks.streams.adaptive_hls.softsub.url;
                 response = await client.GetAsync(endpoint);
                 responsestring = await response.Content.ReadAsStringAsync();
-                Console.WriteLine("http" + responsestring.Split("RESOLUTION=1920x1080")[1].Split("http")[1].Split("#EXT-X-STREAM")[0].Replace(System.Environment.NewLine, ""));
+
+                string maxres = "";
+
+                if (responsestring.Split("RESOLUTION=1920x1080").Length > 1)
+                    maxres = "1920x1080";
+                else if (responsestring.Split("RESOLUTION=1280x720").Length > 1)
+                    maxres = "1280x720";
+                else if (responsestring.Split("RESOLUTION=848x480").Length > 1)
+                    maxres = "848x480";
+                else if (responsestring.Split("RESOLUTION=640x480").Length > 1)
+                    maxres = "640x480";
+                else if (responsestring.Split("RESOLUTION=640x360").Length > 1)
+                    maxres = "640x360";
+                else if (responsestring.Split("RESOLUTION=480x360").Length > 1)
+                    maxres = "480x360";
+                else if (responsestring.Split("RESOLUTION=428x240").Length > 1)
+                    maxres = "428x240";
+                else if (responsestring.Split("RESOLUTION=320x240").Length > 1)
+                    maxres = "320x240";
+                else
+                    maxres = responsestring.Split("RESOLUTION=")[1].Substring(0, 7);
+
+                string installationPath = dlPath == "" ? Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) : dlPath;
+                string installationYDlPath = youtubeDlPath == "" ? Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) : youtubeDlPath;
+
+                Process proc = new Process();
+                proc.StartInfo.FileName = "powershell.exe";
+                proc.StartInfo.Arguments = "/c " + "cd " + installationPath.Substring(0, 1) + @":\" + "'" + installationPath.Substring(3) + "'; " + installationYDlPath.Substring(0, 1) + @":\" + "'" + installationYDlPath.Substring(3) + "'" + @"\./youtube-dl.exe --output '" + serietitle + " " + episodenumber + " – " + title + "-" + episodecode + ".mp4' 'http" + responsestring.Split("RESOLUTION=" + maxres)[1].Split("http")[1].Split("#EXT-X-STREAM")[0].Replace("\\n", "") + "' --prefer-ffmpeg --no-check-certificate";
+                proc.StartInfo.CreateNoWindow = true;
+                proc.StartInfo.UseShellExecute = false;
+                proc.Start();
+
                 string subLang = GetLocale(config.country_code);
-                switch (subLang) {
-                    case "es-LA":
-                        endpoint = streamLinks.subtitles.EsLA.url;
-                        break;
-                    case "es-ES":
-                        endpoint = streamLinks.subtitles.EsES.url;
-                        break;
-                    case "fr-FR":
-                        endpoint = streamLinks.subtitles.FrFR.url;
-                        break;
-                    case "pt-BR":
-                        endpoint = streamLinks.subtitles.PtBR.url;
-                        break;
-                    case "it-IT":
-                        endpoint = streamLinks.subtitles.ItIT.url;
-                        break;
-                    case "de-DE":
-                        endpoint = streamLinks.subtitles.DeDE.url;
-                        break;
-                    case "ru-RU":
-                        endpoint = streamLinks.subtitles.RuRU.url;
-                        break;
-                    case "ar-ME":
-                        endpoint = streamLinks.subtitles.ArME.url;
-                        break;
-                    default:
-                        endpoint = streamLinks.subtitles.EnUS.url;
-                        break;
+                try {
+                    switch (subLang) {
+                        case "es-LA":
+                            endpoint = streamLinks.subtitles.EsLA.url;
+                            break;
+                        case "es-ES":
+                            endpoint = streamLinks.subtitles.EsES.url;
+                            break;
+                        case "fr-FR":
+                            endpoint = streamLinks.subtitles.FrFR.url;
+                            break;
+                        case "pt-BR":
+                            endpoint = streamLinks.subtitles.PtBR.url;
+                            break;
+                        case "it-IT":
+                            endpoint = streamLinks.subtitles.ItIT.url;
+                            break;
+                        case "de-DE":
+                            endpoint = streamLinks.subtitles.DeDE.url;
+                            break;
+                        case "ru-RU":
+                            endpoint = streamLinks.subtitles.RuRU.url;
+                            break;
+                        case "ar-ME":
+                            endpoint = streamLinks.subtitles.ArME.url;
+                            break;
+                        default:
+                            endpoint = streamLinks.subtitles.EnUS.url;
+                            break;
+                    }
+                }catch {
+                    subLang = "en-US";
+                    endpoint = streamLinks.subtitles.EnUS.url;
                 }
                 
                 response = await client.GetAsync(endpoint);
                 responsestring = await response.Content.ReadAsStringAsync();
-                Console.WriteLine(responsestring);
+                string[] subtitles = { responsestring };
+                await File.WriteAllLinesAsync(installationPath + @"\" + serietitle + " " + episodenumber + " – " + title + "-" + episodecode + "." + subLang + ".ass", subtitles);
             } catch (Exception e) {
                 System.Diagnostics.Debug.WriteLine(e.Message);
             }
