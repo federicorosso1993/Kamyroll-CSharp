@@ -1632,10 +1632,11 @@ namespace Kamyroll_CSharp {
 
                 string installationPath = dlPath == "" ? Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) : dlPath;
                 string installationYDlPath = youtubeDlPath == "" ? Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) : youtubeDlPath;
+                string titletotal = serietitle + " " + episodenumber + " – " + title + " - " + episodecode + ".mp4";
 
                 Process proc = new Process();
                 proc.StartInfo.FileName = "powershell.exe";
-                proc.StartInfo.Arguments = "/c " + "cd " + installationPath.Substring(0, 1) + @":\" + "'" + installationPath.Substring(3) + "'; " + installationYDlPath.Substring(0, 1) + @":\" + "'" + installationYDlPath.Substring(3) + "'" + @"\./youtube-dl.exe --output '" + serietitle + " " + episodenumber + " – " + title + "-" + episodecode + ".mp4' 'http" + responsestring.Split("RESOLUTION=" + maxres)[1].Split("http")[1].Split("#EXT-X-STREAM")[0].Replace("\\n", "") + "' --prefer-ffmpeg --no-check-certificate";
+                proc.StartInfo.Arguments = "/c " + "cd " + installationPath.Substring(0, 1) + @":\" + "'" + installationPath.Substring(3) + "'; " + installationYDlPath.Substring(0, 1) + @":\" + "'" + installationYDlPath.Substring(3) + "'" + @"\./youtube-dl.exe --output " + "\"\"\"" + titletotal + "\"\"\" " + "'http" + responsestring.Split("RESOLUTION=" + maxres)[1].Split("http")[1].Split("#EXT-X-STREAM")[0] + "' --prefer-ffmpeg --no-check-certificate";
                 proc.StartInfo.CreateNoWindow = true;
                 proc.StartInfo.UseShellExecute = false;
                 proc.Start();
@@ -1679,7 +1680,7 @@ namespace Kamyroll_CSharp {
                 response = await client.GetAsync(endpoint);
                 responsestring = await response.Content.ReadAsStringAsync();
                 string[] subtitles = { responsestring };
-                await File.WriteAllLinesAsync(installationPath + @"\" + serietitle + " " + episodenumber + " – " + title + "-" + episodecode + "." + subLang + ".ass", subtitles);
+                await File.WriteAllLinesAsync(installationPath + @"\" + titletotal + "." + subLang + ".ass", subtitles);
             } catch (Exception e) {
                 System.Diagnostics.Debug.WriteLine(e.Message);
             }
