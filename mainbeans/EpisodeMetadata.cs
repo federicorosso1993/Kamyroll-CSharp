@@ -33,7 +33,7 @@ namespace Kamyroll_CSharp {
             get; set;
         }
         [JsonPropertyName("sequence_number")]
-        public int SequenceNumber {
+        public double SequenceNumber {
             get; set;
         }
         [JsonPropertyName("duration_ms")]
