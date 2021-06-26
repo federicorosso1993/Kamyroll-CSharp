@@ -228,7 +228,7 @@ namespace Kamyroll_CSharp {
 
                 string installationPath = dlPath == "" ? Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) : dlPath;
                 string installationYDlPath = youtubeDlPath == "" ? Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) : youtubeDlPath;
-                string titletotal = serietitle + " " + episodenumber + " – " + title + " - " + episodecode + ".mp4";
+                string titletotal = serietitle.Replace(":","") + " " + episodenumber + " – " + title + " - " + episodecode + ".mp4";
 
                 Process proc = new Process();
                 proc.StartInfo.FileName = "powershell.exe";
