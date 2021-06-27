@@ -232,10 +232,14 @@ namespace Kamyroll_CSharp {
                     maxres = "1280x720";
                 else if (responsestring.Split("RESOLUTION=848x480").Length > 1)
                     maxres = "848x480";
+                else if (responsestring.Split("RESOLUTION=656x480").Length > 1)
+                    maxres = "656x480";
                 else if (responsestring.Split("RESOLUTION=640x480").Length > 1)
                     maxres = "640x480";
                 else if (responsestring.Split("RESOLUTION=640x360").Length > 1)
                     maxres = "640x360";
+                else if (responsestring.Split("RESOLUTION=496x360").Length > 1)
+                    maxres = "496x360";
                 else if (responsestring.Split("RESOLUTION=480x360").Length > 1)
                     maxres = "480x360";
                 else if (responsestring.Split("RESOLUTION=428x240").Length > 1)
@@ -243,6 +247,9 @@ namespace Kamyroll_CSharp {
                 else if (responsestring.Split("RESOLUTION=320x240").Length > 1)
                     maxres = "320x240";
                 else
+                    maxres = responsestring.Split("RESOLUTION=")[1].Substring(0, 7);
+
+                if(Int32.Parse(maxres.Substring(0,3)) < Int32.Parse(responsestring.Split("RESOLUTION=")[1].Substring(0, 3)))
                     maxres = responsestring.Split("RESOLUTION=")[1].Substring(0, 7);
 
                 string installationPath = dlPath == "" ? Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) : dlPath;
