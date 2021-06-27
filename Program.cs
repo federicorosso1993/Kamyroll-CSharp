@@ -65,7 +65,26 @@ namespace Kamyroll_CSharp {
             } catch {
                 Console.WriteLine("Invalid login");
             }
-            var endpoint = "https://api.crunchyroll.com/start_session.0.json?version=1.0&access_token=LNDJgOit5yaRIWN&device_type=com.crunchyroll.windows.desktop&device_id=Az2srGnChW65fuxYz2Xxl1GcZQgtGgI";
+            string installPath = youtubeDlPath == "" ? Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) : youtubeDlPath;
+            string[] deviceId = null;
+
+            if (!File.Exists(installPath + @"/deviceId")){ 
+                var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+                var stringChars = new char[31];
+                var random = new Random();
+
+                for (int i = 0; i < stringChars.Length; i++) {
+                    stringChars[i] = chars[random.Next(chars.Length)];
+                }
+                string[] defaultN = {
+                    new String(stringChars)
+                };
+                await File.WriteAllLinesAsync(installPath + @"\deviceId", defaultN);
+            }
+            
+            deviceId = await File.ReadAllLinesAsync(installPath + @"\deviceId");
+
+            var endpoint = "https://api.crunchyroll.com/start_session.0.json?version=&access_token=LNDJgOit5yaRIWN&device_type=com.crunchyroll.windows.desktop&device_id=" + deviceId[0];
             try {
                 HttpResponseMessage response = await client.GetAsync(endpoint);
                 string responsestring = await response.Content.ReadAsStringAsync();
