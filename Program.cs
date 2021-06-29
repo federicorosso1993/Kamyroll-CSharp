@@ -48,11 +48,17 @@ namespace Kamyroll_CSharp {
             if (arguments.Contains("--login") && linkdownloads.Count > 0) {
                 LoginAsync(arguments[indexLogin]).Wait();
 
-                foreach(string linkdownload in linkdownloads) {
+                foreach (string linkdownload in linkdownloads) {
+                    DownloadAsync(linkdownload).Wait();
+                }
+            } else if (linkdownloads.Count > 0) {
+                NoLoginAsync().Wait();
+
+                foreach (string linkdownload in linkdownloads) {
                     DownloadAsync(linkdownload).Wait();
                 }
             } else {
-                Console.WriteLine("Login and download link required");
+                Console.WriteLine("download link required");
             }
         }
 
@@ -110,6 +116,40 @@ namespace Kamyroll_CSharp {
                 System.Diagnostics.Debug.WriteLine(e.Message);
             }
         }
+
+        public static async Task NoLoginAsync() {
+            string installPath = youtubeDlPath == "" ? Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) : youtubeDlPath;
+            string[] deviceId = null;
+
+            if (!File.Exists(installPath + @"/deviceId")) {
+                var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+                var stringChars = new char[31];
+                var random = new Random();
+
+                for (int i = 0; i < stringChars.Length; i++) {
+                    stringChars[i] = chars[random.Next(chars.Length)];
+                }
+                string[] defaultN = {
+                    new String(stringChars)
+                };
+                await File.WriteAllLinesAsync(installPath + @"\deviceId", defaultN);
+            }
+
+            deviceId = await File.ReadAllLinesAsync(installPath + @"\deviceId");
+
+            var endpoint = "https://api.crunchyroll.com/start_session.0.json?version=&access_token=LNDJgOit5yaRIWN&device_type=com.crunchyroll.windows.desktop&device_id=" + deviceId[0];
+            try {
+                HttpResponseMessage response = await client.GetAsync(endpoint);
+                string responsestring = await response.Content.ReadAsStringAsync();
+                CrSession crSession = JsonSerializer.Deserialize<CrSession>(responsestring);
+                var sessionId = crSession.Data.SessionId;
+
+                StartSessionNoLoginAsync(sessionId).Wait();
+            } catch (Exception e) {
+                System.Diagnostics.Debug.WriteLine(e.Message);
+            }
+        }
+
 
         public static async Task StartSessionAsync(string sessionId) {
             string channel = "";
@@ -175,6 +215,29 @@ namespace Kamyroll_CSharp {
             config.ExternalId = externalId;
         }
 
+        public static async Task StartSessionNoLoginAsync(string sessionId) {
+            string channel = "-";
+            
+            GetHeadersAsync(sessionId).Wait();
+
+            var endpoint = "https://beta-api.crunchyroll.com/index/v2";
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(tokenTypeG, accessTokenG);
+            HttpResponseMessage response = await client.GetAsync(endpoint);
+            string responsestring = await response.Content.ReadAsStringAsync();
+            ServiceCr serviceCr = JsonSerializer.Deserialize<ServiceCr>(responsestring);
+            var policy = serviceCr.Cms.Policy;
+            var signature = serviceCr.Cms.Signature;
+            var keyPairId = serviceCr.Cms.KeyPairId;
+
+            config.SessionId = sessionId;
+            config.Channel = channel;
+            config.MaturityRating = "M2";
+            config.Policy = policy;
+            config.Signature = signature;
+            config.KeyPairId = keyPairId;
+        }
+
+
         public static async Task GetHeadersAsync(string sessionId, string etpRt) {
             var endpoint = "https://beta-api.crunchyroll.com/auth/v1/token";
             var data = new Dictionary<string, string> {
@@ -203,6 +266,36 @@ namespace Kamyroll_CSharp {
                 System.Diagnostics.Debug.WriteLine(e.Message);
             }
         }
+
+        public static async Task GetHeadersAsync(string sessionId) {
+            var endpoint = "https://beta-api.crunchyroll.com/auth/v1/token";
+            var data = new Dictionary<string, string> {
+                {
+                    "grant_type",
+                    "client_id"}};
+
+
+            var cookieContainer = new CookieContainer();
+            var handler = new HttpClientHandler() { CookieContainer = cookieContainer };
+
+            var client2 = new HttpClient(handler);
+            client2.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", "bm9haWhkZXZtXzZpeWcwYThsMHE6");
+            cookieContainer.Add(new Uri(endpoint), new Cookie("session_id", sessionId));
+
+            try {
+                HttpResponseMessage response = await client2.PostAsync(endpoint, new FormUrlEncodedContent(data));
+                string responsestring = await response.Content.ReadAsStringAsync();
+                AccessToken accessToken = JsonSerializer.Deserialize<AccessToken>(responsestring);
+                var accessTokenIn = accessToken.AccessTokenIn;
+                var tokenType = accessToken.TokenType;
+                tokenTypeG = tokenType;
+                accessTokenG = accessTokenIn;
+                config.CountryCode = accessToken.Country;
+            } catch (Exception e) {
+                System.Diagnostics.Debug.WriteLine(e.Message);
+            }
+        }
+
 
         public static async Task DownloadAsync(string linkdownload) {
             string episodecode = linkdownload.Split("/")[5];

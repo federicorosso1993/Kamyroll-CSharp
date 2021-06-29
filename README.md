@@ -14,5 +14,5 @@ I made this to study the way Crunchyroll Beta API works and to create a better w
 
 dlpath (optional) you can download in the path of the exe of this program <br>
 youtubedlpath (optional) but you need to have youtube-dl.exe and ffmpeg.exe in the path of the exe of this program <br>
-login (mandatory) without login crunchyroll beta cannot be used <br>
+login (optional) without login you can download not premium only episodes <br>
 download (mandatory) without a link to download there is no reason to use this program (you can download multiple episodes) <br>
