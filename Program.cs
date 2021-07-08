@@ -89,7 +89,8 @@ namespace Kamyroll_CSharp {
             }
             
             deviceId = await File.ReadAllLinesAsync(installPath + @"\deviceId");
-
+            //alternative use this without deviceId generation, check the update version on this page https://www.crunchyroll.com/welcome/login or on this page https://www.crunchyroll.com/originals/it/index.html
+            //var endpoint = "https://api.crunchyroll.com/get_upsell_data.0.json?sess_id=1&device_id=whatvalueshouldbeforweb&device_type=com.crunchyroll.static&access_token=giKq5eY27ny3cqz&referer=https:%2F%2Fwww.crunchyroll.com%2Fit%2Fwelcome%2Flogin";
             var endpoint = "https://api.crunchyroll.com/start_session.0.json?version=&access_token=LNDJgOit5yaRIWN&device_type=com.crunchyroll.windows.desktop&device_id=" + deviceId[0];
             try {
                 HttpResponseMessage response = await client.GetAsync(endpoint);
@@ -138,6 +139,8 @@ namespace Kamyroll_CSharp {
             deviceId = await File.ReadAllLinesAsync(installPath + @"\deviceId");
 
             var endpoint = "https://api.crunchyroll.com/start_session.0.json?version=&access_token=LNDJgOit5yaRIWN&device_type=com.crunchyroll.windows.desktop&device_id=" + deviceId[0];
+            //alternative use this without deviceId generation, check the update version on this page https://www.crunchyroll.com/welcome/login or on this page https://www.crunchyroll.com/originals/it/index.html
+            //var endpoint = "https://api.crunchyroll.com/get_upsell_data.0.json?sess_id=1&device_id=whatvalueshouldbeforweb&device_type=com.crunchyroll.static&access_token=giKq5eY27ny3cqz&referer=https:%2F%2Fwww.crunchyroll.com%2Fit%2Fwelcome%2Flogin";
             try {
                 HttpResponseMessage response = await client.GetAsync(endpoint);
                 string responsestring = await response.Content.ReadAsStringAsync();
