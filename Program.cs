@@ -401,7 +401,7 @@ namespace Kamyroll_CSharp {
                 response = await client.GetAsync(endpoint);
                 responsestring = await response.Content.ReadAsStringAsync();
                 string[] subtitles = { responsestring };
-                await File.WriteAllLinesAsync(installationPath + @"\" + titletotal + "." + subLang + ".ass", subtitles);
+                await File.WriteAllLinesAsync(installationPath + @"\" + titletotal.Substring(0, titletotal.Length - 4) + "." + subLang + ".ass", subtitles);
             } catch (Exception e) {
                 System.Diagnostics.Debug.WriteLine(e.Message);
             }
