@@ -357,7 +357,7 @@ namespace Kamyroll_CSharp {
 
                 Process proc = new Process();
                 proc.StartInfo.FileName = "powershell.exe";
-                proc.StartInfo.Arguments = "/c " + "cd " + installationPath.Substring(0, 1) + @":\" + "'" + installationPath.Substring(3) + "'; " + installationYDlPath.Substring(0, 1) + @":\" + "'" + installationYDlPath.Substring(3) + "'" + @"\./youtube-dl.exe --output " + "\"\"\"" + titletotal + "\"\"\" " + "'http" + responsestring.Split("RESOLUTION=" + maxres)[1].Split("http")[1].Split("#EXT-X-STREAM")[0] + "' --prefer-ffmpeg --no-check-certificate";
+                proc.StartInfo.Arguments = "/c " + "cd " + installationPath.Substring(0, 1) + @":\" + "'" + installationPath.Substring(3) + "'; " + installationYDlPath.Substring(0, 1) + @":\" + "'" + installationYDlPath.Substring(3) + "'" + @"\./yt-dlp.exe --output " + "\"\"\"" + titletotal + "\"\"\" " + "'http" + responsestring.Split("RESOLUTION=" + maxres)[1].Split("http")[1].Split("#EXT-X-STREAM")[0] + "' --prefer-ffmpeg --no-check-certificate";
                 proc.StartInfo.CreateNoWindow = true;
                 proc.StartInfo.UseShellExecute = false;
                 proc.Start();
